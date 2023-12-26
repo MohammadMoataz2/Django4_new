@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .models import *
 from .forms import OrderForm,CustomerForm
 # Create your views here.
-
+from django.forms import inlineformset_factory #create multiple form in one form
 from django.http import HttpResponse
 
 def home(request):
@@ -101,3 +101,29 @@ def deleteOrder(request,pk):
         'item':order,
     }
     return render(request, 'accounts/delete.html', context)
+
+
+
+
+def createOrderCustomer(request,pk):
+    OrderFormSet = inlineformset_factory(Customer,Order , fields = ('product','status')) #parent and children
+    customer = Customer.objects.get(id = pk)
+
+    # form = OrderForm(initial = {
+    #     'customer':customer,
+
+    # })
+
+    formset = OrderFormSet(instance = customer)
+    context = {
+     #   'form':form,
+        'formset' : formset}
+    
+    formset = OrderFormSet(request.POST,instance = customer)
+
+    if request.method == 'POST':
+        #print(request.POST)
+        if formset.is_valid():
+            formset.save()
+            return redirect('/')
+    return render(request,'accounts/ordercustomer_form.html',context)
