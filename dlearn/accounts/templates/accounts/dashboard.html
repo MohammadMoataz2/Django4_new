@@ -6,7 +6,14 @@
 
 <h1>Dashboard</h1>
 
+<style>
+	.divScroll {
+	overflow:scroll;
+	height: 500px;
 
+
+	}
+	</style>
 
 <br>
 
@@ -40,8 +47,14 @@
 	<div class="col-md-7">
 		<h5>LAST 5 ORDERS</h5>
 		<hr>
+
+
+		
 		<div class="card card-body">
 			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'create_order' %}">Create Order</a>
+			<div class="divScroll">
+
+
 			<table class="table table-sm">
 				<tr>
 					<th>Product</th>
@@ -66,6 +79,12 @@
     
 		
 			</table>
+
+
+
+
+			</div>
+
 		</div>
 	</div>
 

@@ -106,7 +106,7 @@ def deleteOrder(request,pk):
 
 
 def createOrderCustomer(request,pk):
-    OrderFormSet = inlineformset_factory(Customer,Order , fields = ('product','status')) #parent and children
+    OrderFormSet = inlineformset_factory(Customer,Order , fields = ('product','status') , extra = 10) #parent and children
     customer = Customer.objects.get(id = pk)
 
     # form = OrderForm(initial = {
@@ -114,7 +114,7 @@ def createOrderCustomer(request,pk):
 
     # })
 
-    formset = OrderFormSet(instance = customer)
+    formset = OrderFormSet(queryset=Order.objects.none(),instance = customer)
     context = {
      #   'form':form,
         'formset' : formset}
