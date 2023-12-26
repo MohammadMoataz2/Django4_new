@@ -1,7 +1,18 @@
 {%  extends 'accounts/main.html' %}
 
 {% block content %}
-
+<style>
+	form div {
+	  display: inline-block;
+	  margin-right: 20px; /* Adjust the margin as needed */
+	  vertical-align: top; /* Align elements to the top */
+	}
+  
+	label {
+	  display: block;
+	  margin-bottom: 5px;
+	}
+  </style>
 	<br>
 
 <div class="row">
@@ -41,6 +52,7 @@
 	<div class="col">
 		<div class="card card-body">
 			<form method="get">
+				{{myFilter.form}}
 
 		    <button class="btn btn-primary" type="submit">Search</button>
 		  </form>
@@ -61,6 +73,7 @@
 					<th>Status</th>
 					<th>Update</th>
 					<th>Remove</th>
+					<th>Note</th>
 				</tr>
 
                 {% for order in orders %}
@@ -72,7 +85,7 @@
                     <td>{{order.status}}</td>
 					<td><a class = "btn btn-sm btn-info" href = "{% url 'update_order' order.id %}">Update</a></td>
                     <td><a class = "btn btn-sm btn-danger" href = "{% url 'delete_order' order.id %}">Delete</a></td>
-
+					<td>{{order.note}}</td>
                 </tr>
 
                 {% endfor %}

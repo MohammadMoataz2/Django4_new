@@ -38,11 +38,11 @@ class ProductsAdmin(admin.ModelAdmin):
 
 class OrdersAdmin(admin.ModelAdmin):
     pass
-    list_display = ["customer", "product" , "date_created" , "status"]
+    list_display = ["customer", "product" , "date_created" , "status" , "note"]
     list_display_links = ["customer"]
-    list_editable = [ "product" , "status"]
-    search_fields = ["customer", "product" , "date_created" , "status"]
-    list_filter = ["customer", "product" , "date_created" , "status"]
+    list_editable = [ "product" , "status" , "note"]
+    search_fields = ["customer", "product" , "date_created" , "status" , "note"]
+    list_filter = ["customer", "product" , "date_created" , "status" ,"note"]
     
 
 

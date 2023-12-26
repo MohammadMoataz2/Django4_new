@@ -4,7 +4,7 @@ from .forms import OrderForm,CustomerForm
 # Create your views here.
 from django.forms import inlineformset_factory #create multiple form in one form
 from django.http import HttpResponse
-
+from .filters import OrderFilter
 def home(request):
     orders = Order.objects.all()
     customers = Customer.objects.all()
@@ -36,13 +36,18 @@ def products(request):
 
 
 def customers(request,pk):
+
     customer = Customer.objects.get(id = pk)
     orders  = customer.order_set.all()
+    
     order_count = orders.count()
+    myFilter = OrderFilter(request.GET , queryset = orders)
+    orders = myFilter.qs
     context = {
         'customer':customer,
         'orders' : orders,
         'order_count':order_count,
+        'myFilter':myFilter
     }
     return render(request,'accounts/customers.html',context)
 
